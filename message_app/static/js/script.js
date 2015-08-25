@@ -69,13 +69,7 @@ function submitMessage() {
 }
 
 function setMessage(processedMsg) {
-	var msgContents,
-	    div = document.createElement('div');
-
-	div.className = 'panel panel-default';
-	msgContents = '<div class="panel-body">' + processedMsg.message + '</div>';
-	div.innerHTML = msgContents;
-	messages.insertBefore( div, messages.firstChild );
+	generateMessage(null, processedMsg.created, processedMsg.message)
 }
 
 function getMessages() {
@@ -85,28 +79,35 @@ function getMessages() {
         isAdmin = document.getElementsByTagName('body')[0].className === 'admin' ? true : false;
 
 	cursor.onsuccess = function(e) {
-		var messages = document.querySelector('#messages'),
-	    	res = e.target.result,
-	    	msgContents,
-	    	div = document.createElement('div'),
-            p = document.createElement('p');
-
-		div.className = 'panel panel-default';
+        var res = e.target.result;
 
 	    if (res) {
-	    	msgContents = '<div class="panel-body" data-key="' + res.key + '">';
-
-            if (isAdmin) {
-                msgContents += '<button type="button" class="delete close">&times;</button>';
-            }
-            msgContents += res.value.message.replace('\n', '<br>') + '</div>';
-
-	    	div.innerHTML = msgContents;
-	    	messages.insertBefore( div, messages.firstChild );
-
+            generateMessage(res.key, res.value.created, res.value.message, isAdmin);
 	        res.continue();
 	    }
 	}
+}
+
+function generateMessage(key, created, message, isAdmin) {
+    var messages = document.querySelector('#messages'),
+        div = document.createElement('div'),
+        monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+        day = created.getDate(),
+        monthIndex = created.getMonth(),
+        year = created.getFullYear(),
+        hours = created.getHours(),
+        mins = created.getMinutes() < 10 ? '0' + created.getMinutes() : created.getMinutes(),
+        msgContents = '<div class="panel-heading"><span class="text-muted">' + day + '.' + (monthIndex + 1) + '.' + year + ' ' + hours + ':' + mins + '</span></div><div class="panel-body" data-key="' + key + '">';
+
+    div.className = 'panel panel-default';
+
+    if (isAdmin) {
+        msgContents += '<button type="button" class="delete close">&times;</button>';
+    }
+    msgContents += message.replace(/(?:\r\n|\r|\n)/g, '<br>') + '</div>';
+
+    div.innerHTML = msgContents;
+    messages.insertBefore( div, messages.firstChild );
 }
 
 function deleteMessage(target) {
