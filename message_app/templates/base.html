@@ -13,7 +13,7 @@
 <body class="{{ title }}">
 
     <nav class="navbar navbar-default">
-        <div class="container-fluid">
+        <div class="container">
             <a href="/#" class="navbar-brand">Message app</a>
             <ul class="nav navbar-nav">
                 <li class="{% if title == 'home' %}active{% endif %}">
@@ -35,6 +35,14 @@
             {% endif %}
         </div>
     </nav>
+
+    <div class="container">
+        <div class="page-header row">
+            <div class="col-md-6 col-md-offset-3">
+                <h1>{% if title == 'home' %}Welcome to the Message App!{% else %}{{ title | capitalize }}{% endif %}</h1>
+            </div>
+        </div>
+    </div>
 
     {% block body %}
     {% endblock %}
