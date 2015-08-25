@@ -145,8 +145,7 @@
 
         setTimeout(function() {
             div.className = div.className + ' panel-appear';
-
-        }, 50);
+        }, 500);
     }
 
 

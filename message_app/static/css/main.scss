@@ -8,10 +8,12 @@ body {
 
 .panel {
     opacity: 0;
-    -webkit-transition: opacity 1s;
-    transition: opacity 1s;
+    -webkit-transition: all 1s;
+    transition: all 1s;
 }
 
 .panel-appear {
+    margin-bottom: 20px !important;
+
     opacity: 1;
 }
