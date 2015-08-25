@@ -1,7 +1,10 @@
 (function(window, document) {
 
 var idbSupported = false,
-	db;
+	db,
+    inputs = document.querySelectorAll('input[type="text"], input[type="password"]');
+
+activate();
 
 document.addEventListener('DOMContentLoaded', function() {
 
@@ -24,7 +27,9 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log('Successfully opened indexedDB request');
             db = e.target.result;
 
-            getMessages();
+            if (document.querySelector('#messages')) {
+                getMessages();
+            }
 
             if (document.querySelector('#submitButton')) {
                 document.querySelector('#submitButton').addEventListener('click', submitMessage, false);
@@ -44,6 +49,14 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
 }, false);
+
+function activate() {
+    for (i = 0; i < inputs.length; ++i) {
+        inputs[i].addEventListener('keyup', function(event) {
+            removeValidation(event.target);
+        });
+    }
+}
 
 function submitMessage() {
 	var message = document.querySelector('#messageBox').value,
@@ -121,6 +134,13 @@ function deleteMessage(target) {
         panel.remove();
     };
     return false;
+}
+
+function removeValidation(el) {
+    if (el.nextSibling) {
+        el.nextSibling.remove();
+        el.parentNode.className = el.parentNode.className.replace(' has-error', '');
+    }
 }
 
 // HELPER FUNCTIONS
