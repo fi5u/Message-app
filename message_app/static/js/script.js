@@ -7,7 +7,6 @@
     // Action for first load
     activate();
 
-
     // Functions to call on first load
     function activate() {
         // Set up the browser-based db
@@ -45,6 +44,8 @@
                     if (document.querySelector('#submitButton')) {
                         document.querySelector('#submitButton').addEventListener('click', submitMessage, false);
                     }
+
+                    setMessageCount();
                 }
 
                 openRequest.onerror = function(e) {
@@ -89,6 +90,7 @@
 
         request.onsuccess = function(e) {
         	setMessage(processedMsg);
+            setMessageCount();
         }
     }
 
@@ -141,6 +143,7 @@
 
         setTimeout(function() {
             div.className = div.className + ' panel-appear';
+
         }, 50);
     }
 
@@ -164,6 +167,7 @@
 
         transaction.oncomplete = function(event) {
             panel.className = panel.className.replace(' panel-appear', '');
+            setMessageCount();
             setTimeout(function() {
                 panel.remove();
             }, 1000);
@@ -188,6 +192,14 @@
             el.nextSibling.remove();
             el.parentNode.className = el.parentNode.className.replace(' has-error', '');
         }
+    }
+
+
+    // Count the number of messages and update the message count
+    function setMessageCount() {
+        db.transaction(['osMsgStore'],'readonly').objectStore('osMsgStore').count().onsuccess = function(event) {
+            document.getElementById('messageCount').innerHTML = event.target.result;
+        };
     }
 
 

@@ -40,13 +40,17 @@
                     </li>
                     <li role="separator" class="divider"></li>
                 </ul>
-                {% if session['authenticated'] %}
+
                 <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a>Message count <span class="badge" id="messageCount">0</span></a>
+                    </li>
+                    {% if session['authenticated'] %}
                     <li>
                         <a href="/logout">Logout</a>
                     </li>
+                    {% endif %}
                 </ul>
-                {% endif %}
             </div>
         </div>
     </nav>
