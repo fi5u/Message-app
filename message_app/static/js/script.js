@@ -121,6 +121,10 @@ function generateMessage(key, created, message, isAdmin) {
 
     div.innerHTML = msgContents;
     messages.insertBefore( div, messages.firstChild );
+
+    setTimeout(function() {
+        div.className = div.className + ' panel-appear';
+    }, 50);
 }
 
 function deleteMessage(target) {
@@ -131,7 +135,10 @@ function deleteMessage(target) {
         request = transaction.objectStore('osMsgStore').delete(key);
 
     transaction.oncomplete = function(event) {
-        panel.remove();
+        panel.className = panel.className.replace(' panel-appear', '');
+        setTimeout(function() {
+            panel.remove();
+        }, 1000);
     };
     return false;
 }

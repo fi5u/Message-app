@@ -1,3 +1,13 @@
 .intro {
     margin-bottom: 50px;
 }
+
+.panel {
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+.panel-appear {
+    opacity: 1;
+    transition: opacity 1s;
+}
