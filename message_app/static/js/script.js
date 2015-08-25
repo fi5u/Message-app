@@ -66,7 +66,8 @@
 
     // Called when user submits a message on the home page
     function submitMessage() {
-    	var message = document.querySelector('#messageBox').value,
+    	var messageBox = document.querySelector('#messageBox'),
+            message = messageBox.value,
     		transaction = db.transaction(['osMsgStore'],'readwrite'),
     		store = transaction.objectStore('osMsgStore'),
     		processedMsg,
@@ -89,6 +90,7 @@
         }
 
         request.onsuccess = function(e) {
+            document.querySelector('#messageBox').value = '';
         	setMessage(processedMsg);
             setMessageCount();
         }
