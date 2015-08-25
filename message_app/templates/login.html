@@ -7,6 +7,7 @@
         <h1>Login</h1>
     </div>
     <div class="wrapper col-md-4">
+        {% if formerror %}<div class="alert alert-danger" role="alert">Username or password incorrect, please try again</div>{% endif %}
         <form class="form-signin" method="post">
             {{ form.hidden_tag() }}
             <div class="form-group{% if form.username.errors %} has-error{% endif %}">

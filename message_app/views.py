@@ -16,6 +16,9 @@ def login():
         if form.username.data == 'admin' and form.password.data == '123':
             session['authenticated'] = True
             return redirect('/admin')
+        else:
+            return render_template('login.html', title='login', form=form, formerror='Got error')
+
     return render_template('login.html', title='login', form=form)
 
 @message_app.route('/admin')
