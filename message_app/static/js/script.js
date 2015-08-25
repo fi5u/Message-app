@@ -150,8 +150,17 @@
         var parent = target.parentNode,
             key = parseInt(parent.dataset.key),
             panel = parent.parentNode,
+            panelBody = panel.lastChild,
             transaction = db.transaction(['osMsgStore'], 'readwrite'),
-            request = transaction.objectStore('osMsgStore').delete(key);
+            request,
+            text = panelBody.innerText || panelBody.textContent,
+            confirmation = confirm('Are you sure you want to delete the message starting with: ' + text.substr(1).substring(0, 5));
+
+        if (!confirmation) {
+            return false;
+        }
+
+        request = transaction.objectStore('osMsgStore').delete(key);
 
         transaction.oncomplete = function(event) {
             panel.className = panel.className.replace(' panel-appear', '');
