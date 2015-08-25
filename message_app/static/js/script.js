@@ -26,7 +26,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
             getMessages();
 
-            document.querySelector('#submitButton').addEventListener('click', submitMessage, false);
+            if (document.querySelector('#submitButton')) {
+                document.querySelector('#submitButton').addEventListener('click', submitMessage, false);
+            }
         }
 
         openRequest.onerror = function(e) {
@@ -34,6 +36,12 @@ document.addEventListener('DOMContentLoaded', function() {
             console.dir(e);
         }
     }
+
+    document.querySelector('body').addEventListener('click', function(event) {
+        if (event.target.className.toLowerCase() === 'delete close') {
+            deleteMessage(event.target);
+        }
+    });
 
 }, false);
 
@@ -73,24 +81,50 @@ function setMessage(processedMsg) {
 function getMessages() {
 	var transaction = db.transaction(['osMsgStore'], 'readonly'),
 		objectStore = transaction.objectStore('osMsgStore'),
- 		cursor = objectStore.openCursor();
+ 		cursor = objectStore.openCursor(),
+        isAdmin = document.getElementsByTagName('body')[0].className === 'admin' ? true : false;
 
 	cursor.onsuccess = function(e) {
 		var messages = document.querySelector('#messages'),
 	    	res = e.target.result,
 	    	msgContents,
-	    	div = document.createElement('div');
+	    	div = document.createElement('div'),
+            p = document.createElement('p');
 
 		div.className = 'panel panel-default';
 
 	    if (res) {
-	    	msgContents = '<div class="panel-body">' + res.value.message + '</div>';
+	    	msgContents = '<div class="panel-body" data-key="' + res.key + '">';
+
+            if (isAdmin) {
+                msgContents += '<button type="button" class="delete close">&times;</button>';
+            }
+            msgContents += res.value.message.replace('\n', '<br>') + '</div>';
+
 	    	div.innerHTML = msgContents;
 	    	messages.insertBefore( div, messages.firstChild );
 
 	        res.continue();
 	    }
 	}
+}
+
+function deleteMessage(target) {
+    var parent = target.parentNode,
+        key = parseInt(parent.dataset.key),
+        panel = parent.parentNode,
+        transaction = db.transaction(['osMsgStore'], 'readwrite'),
+        request = transaction.objectStore('osMsgStore').delete(key);
+
+    transaction.oncomplete = function(event) {
+        panel.remove();
+    };
+    return false;
+}
+
+// HELPER FUNCTIONS
+function insertAfter(newNode, referenceNode) {
+    referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
 }
 
 })(window, document);
