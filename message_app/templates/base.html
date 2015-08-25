@@ -13,18 +13,27 @@
 <body>
 
     <nav class="navbar navbar-default">
-        <a href="/#" class="navbar-brand">Message app</a>
-        <ul class="nav navbar-nav">
-            <li class="{% if title == 'home' %}active{% endif %}">
-                <a href="/#">Home</a>
-            </li>
-            <li class="{% if title == 'login' %}active{% endif %}">
-                <a href="/login">Admin</a>
-            </li>
-            <li class="{% if title == 'about' %}active{% endif %}">
-                <a href="/about">About</a>
-            </li>
-        </ul>
+        <div class="container-fluid">
+            <a href="/#" class="navbar-brand">Message app</a>
+            <ul class="nav navbar-nav">
+                <li class="{% if title == 'home' %}active{% endif %}">
+                    <a href="/#">Home</a>
+                </li>
+                <li class="{% if title == 'login' or title == 'admin' %}active{% endif %}">
+                    <a href="/login">Admin</a>
+                </li>
+                <li class="{% if title == 'about' %}active{% endif %}">
+                    <a href="/about">About</a>
+                </li>
+            </ul>
+            {% if session['authenticated'] %}
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="/logout">Logout</a>
+                </li>
+            </ul>
+            {% endif %}
+        </div>
     </nav>
 
     {% block body %}
