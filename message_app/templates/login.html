@@ -9,13 +9,19 @@
     <div class="wrapper col-md-4">
         <form class="form-signin" method="post">
             {{ form.hidden_tag() }}
-            <div class="form-group">
+            <div class="form-group{% if form.username.errors %} has-error{% endif %}">
                 <label>Username</label>
                 {{ form.username(class='form-control') }}
+                {% for error in form.username.errors %}
+                    <span style="color: red;">{{ error }}</span>
+                {% endfor %}
             </div>
-            <div class="form-group">
+            <div class="form-group{% if form.password.errors %} has-error{% endif %}">
                 <label>Password</label>
                 {{ form.password(class='form-control') }}
+                {% for error in form.password.errors %}
+                    <span style="color: red;">{{ error }}</span>
+                {% endfor %}
             </div>
             <input class="btn btn-lg btn-primary btn-block" type="submit" value="Login">
         </form>
