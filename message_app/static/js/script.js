@@ -7,6 +7,7 @@
     // Action for first load
     activate();
 
+
     // Functions to call on first load
     function activate() {
         // Set up the browser-based db
