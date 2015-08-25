@@ -1,4 +1,4 @@
 #!/usr/bin/env python
-from Message App import Message App
+from message_app import message_app
 
-Message App.run(debug = True)
+message_app.run(debug = True)

@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock %}
+{% block body %}
+<div class="container" style="margin-top:50px">
+
+    <p><textarea class="form-control" id="messageBox" placeholder="Type your message"></textarea></p>
+    <p><button type="button" id="submitButton" class="btn btn-primary">Submit</button></p>
+
+    <div id="messages">
+
+    </div>
+</div>
+{% endblock %}

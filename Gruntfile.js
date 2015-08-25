@@ -12,17 +12,17 @@ module.exports = function( grunt ) {
 
     // specify an alternate install location for Bower
     bower: {
-      dir: 'Message App/components'
+      dir: 'message_app/components'
     },
 
     // Coffee to JS compilation
     coffee: {
       compile: {
         files: {
-          'temp/js/*.js': 'Message App/static/js/*.coffee'
+          'temp/js/*.js': 'message_app/static/js/*.coffee'
         },
         options: {
-          basePath: 'Message App/static/js'
+          basePath: 'message_app/static/js'
         }
       }
     },
@@ -32,10 +32,10 @@ module.exports = function( grunt ) {
       dist: {
         // http://compass-style.org/help/tutorials/configuration-reference/#configuration-properties
         options: {
-          css_dir: 'Message App/static/css',
-          sass_dir: 'Message App/static/css',
-          images_dir: 'Message App/static/img',
-          javascripts_dir: 'Message App/static/js',
+          css_dir: 'message_app/static/css',
+          sass_dir: 'message_app/static/css',
+          images_dir: 'message_app/static/img',
+          javascripts_dir: 'message_app/static/js',
           force: true
         }
       }
@@ -54,21 +54,21 @@ module.exports = function( grunt ) {
     // default watch configuration
     watch: {
       coffee: {
-        files: 'Message App/static/js/*.coffee',
+        files: 'message_app/static/js/*.coffee',
         tasks: 'coffee reload'
       },
       compass: {
         files: [
-          'Message App/static/css/*.{scss,sass}'
+          'message_app/static/css/*.{scss,sass}'
         ],
         tasks: 'compass reload'
       },
       reload: {
         files: [
-          'Message App/templates/*.html',
-          'Message App/static/css/**/*.css',
-          'Message App/static/js/**/*.js',
-          'Message App/static/img/**/*'
+          'message_app/templates/*.html',
+          'message_app/static/css/**/*.css',
+          'message_app/static/js/**/*.js',
+          'message_app/static/img/**/*'
         ],
         tasks: 'reload'
       }
@@ -79,7 +79,7 @@ module.exports = function( grunt ) {
     lint: {
       files: [
         'Gruntfile.js',
-        'Message App/static/js/**/*.js',
+        'message_app/static/js/**/*.js',
         'spec/**/*.js'
       ]
     },
@@ -114,12 +114,12 @@ module.exports = function( grunt ) {
     output: 'dist',
 
     mkdirs: {
-      staging: 'Message App/'
+      staging: 'message_app/'
     },
 
     // Below, all paths are relative to the staging directory, which is a copy
-    // of the Message App/ directory. Any .gitignore, .ignore and .buildignore file
-    // that might appear in the Message App/ tree are used to ignore these values
+    // of the message_app/ directory. Any .gitignore, .ignore and .buildignore file
+    // that might appear in the message_app/ tree are used to ignore these values
     // during the copy process.
 
     // concat css/**/*.css files, inline @import, output a single minified css
@@ -165,10 +165,10 @@ module.exports = function( grunt ) {
     // you're using usemin-handler to parse rjs config from markup (default
     // setup)
     rjs: {
-      mainFile: '../Message App/templates/base.html',
+      mainFile: '../message_app/templates/base.html',
       // no minification, is done by the min task
       optimize: 'none',
-      baseUrl: '../Message App/static/js',
+      baseUrl: '../message_app/static/js',
       wrap: true,
       name: 'main',
       out: '../message_app/static/js/script.js'
