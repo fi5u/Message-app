@@ -71,6 +71,11 @@
     		processedMsg,
     		request;
 
+        // Should not submit empty message
+        if (message.trim() === '') {
+            return false;
+        }
+
     	processedMsg = {
     		message: message,
     		created: new Date()
