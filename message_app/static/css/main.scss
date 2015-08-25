@@ -1,4 +1,7 @@
+$c-theme: #d24;
+
 body {
+    padding-bottom: 50px;
     overflow-y: scroll;
 
     font-family: 'Roboto', sans-serif;
@@ -18,4 +21,52 @@ body {
     margin-bottom: 20px !important;
 
     opacity: 1;
+}
+
+.panel-heading {
+    font-weight: 300;
+}
+
+.page-header {
+    border-bottom-color: $c-theme;
+
+    h1 {
+        font-weight: 300;
+    }
+}
+
+.message-count {
+    background-color: $c-theme;
+}
+
+.btn-primary {
+    background-image: -webkit-linear-gradient(top, lighten($c-theme, 10%) 0, $c-theme 100%);
+    background-image: -o-linear-gradient(top, lighten($c-theme, 10%) 0, $c-theme 100%);
+    background-image: -webkit-gradient(linear,left top,left bottom,from( lighten($c-theme, 10%)),to( $c-theme));
+    background-image: linear-gradient(to bottom, lighten($c-theme, 10%) 0, $c-theme 100%);
+    border-color: darken($c-theme, 10%);
+
+    &:active,
+    &:hover,
+    &:focus,
+    &:active:hover {
+        background-color: $c-theme;
+        border-color: darken($c-theme, 10%);
+    }
+}
+
+.navbar-default .navbar-brand {
+    color: $c-theme;
+
+    &:hover {
+        color: darken($c-theme, 10%);
+    }
+}
+
+.close {
+    color: $c-theme;
+
+    &:hover {
+        color: $c-theme;
+    }
 }
