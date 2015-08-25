@@ -126,13 +126,12 @@
     function generateMessage(key, created, message, isAdmin) {
         var messages = document.querySelector('#messages'),
             div = document.createElement('div'),
-            monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
             day = created.getDate(),
             monthIndex = created.getMonth(),
             year = created.getFullYear(),
             hours = created.getHours(),
             mins = created.getMinutes() < 10 ? '0' + created.getMinutes() : created.getMinutes(),
-            msgContents = '<div class="panel-heading"><span class="text-muted">' + day + '.' + (monthIndex + 1) + '.' + year + ' ' + hours + ':' + mins + '</span></div><div class="panel-body" data-key="' + key + '">';
+            msgContents = '<div class="panel-heading"><span class="text-muted">' + day + '.' + (monthIndex + 1) + '.' + year + '</span><span class="text-muted pull-right">' + hours + ':' + mins + '</span></div><div class="panel-body" data-key="' + key + '">';
 
         div.className = 'panel panel-default';
 
