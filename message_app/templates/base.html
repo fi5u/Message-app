@@ -8,31 +8,46 @@
     <meta name="viewport" content="width=device-width">
 
     <link rel="stylesheet" href="{{ static('css/lib/bootstrap/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ static('css/lib/bootstrap/bootstrap-theme.min.css') }}">
     <link rel="stylesheet" href="{{ static('css/main.css') }}">
 </head>
+
 <body class="{{ title }}">
 
     <nav class="navbar navbar-default">
-        <div class="container">
-            <a href="/#" class="navbar-brand">Message app</a>
-            <ul class="nav navbar-nav">
-                <li class="{% if title == 'home' %}active{% endif %}">
-                    <a href="/#">Home</a>
-                </li>
-                <li class="{% if title == 'login' or title == 'admin' %}active{% endif %}">
-                    <a href="/login">Admin</a>
-                </li>
-                <li class="{% if title == 'about' %}active{% endif %}">
-                    <a href="/about">About</a>
-                </li>
-            </ul>
-            {% if session['authenticated'] %}
-            <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a href="/logout">Logout</a>
-                </li>
-            </ul>
-            {% endif %}
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+                <a href="/#" class="navbar-brand">Message app</a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="{% if title == 'home' %}active{% endif %}">
+                        <a href="/#">Home</a>
+                    </li>
+                    <li class="{% if title == 'login' or title == 'admin' %}active{% endif %}">
+                        <a href="/login">Admin</a>
+                    </li>
+                    <li class="{% if title == 'about' %}active{% endif %}">
+                        <a href="/about">About</a>
+                    </li>
+                    <li role="separator" class="divider"></li>
+                </ul>
+                {% if session['authenticated'] %}
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/logout">Logout</a>
+                    </li>
+                </ul>
+                {% endif %}
+            </div>
         </div>
     </nav>
 
@@ -47,6 +62,8 @@
     {% block body %}
     {% endblock %}
 
+    <script src="{{ static('js/vendors/jquery/jquery-1.11.3.min.js') }}"></script>
+    <script src="{{ static('js/vendors/bootstrap/bootstrap-collapse.js') }}"></script>
     <script src="{{ static('js/script.js') }}"></script>
 </body>
 </html>
